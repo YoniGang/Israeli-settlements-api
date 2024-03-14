@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  assignment-app:
+    build:
+      context: "."
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    environment:
+      PORT: 80
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/app
+      - /app/.venv
+
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
