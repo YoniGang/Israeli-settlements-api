@@ -13,6 +13,7 @@ sqlalchemy = "^2.0.22"
 alembic = "^1.9.1"
 asyncpg = ">=0.28.0,<0.30"
 psycopg2-binary = "2.9.9"
+requests = "2.31.0"
 
 [build-system]
 requires = ["poetry-core"]

@@ -31,4 +31,4 @@ ENV PATH /venv/bin:$PATH
 ENV TZ UTC
 
 COPY . .
-CMD /venv/bin/uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-80} --forwarded-allow-ips='*' --proxy-headers
+CMD /venv/bin/uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-80} --reload --forwarded-allow-ips='*' --proxy-headers
