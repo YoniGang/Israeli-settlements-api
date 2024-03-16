@@ -2,7 +2,7 @@
 
 Revision ID: 0001
 Revises: 
-Create Date: 2024-03-14 17:15:33.795592
+Create Date: 2024-03-16 21:40:18.597897
 
 """
 from typing import Sequence, Union
@@ -28,6 +28,7 @@ def upgrade() -> None:
     op.create_index(op.f('ix_city_settlement_symbol'), 'city', ['settlement_symbol'], unique=False)
     op.create_table('population_by_age',
                     sa.Column('id', sa.Integer(), nullable=False),
+                    sa.Column('city_id', sa.Integer(), nullable=True),
                     sa.Column('data_date', sa.DateTime(), nullable=False),
                     sa.Column('range_0_5', sa.Integer(), nullable=False),
                     sa.Column('range_6_18', sa.Integer(), nullable=False),
@@ -36,6 +37,7 @@ def upgrade() -> None:
                     sa.Column('range_56_64', sa.Integer(), nullable=False),
                     sa.Column('range_65_and_more', sa.Integer(), nullable=False),
                     sa.Column('created_at', sa.DateTime(), nullable=False),
+                    sa.ForeignKeyConstraint(['city_id'], ['city.settlement_symbol'], ),
                     sa.PrimaryKeyConstraint('id')
                     )
     op.create_index(op.f('ix_population_by_age_data_date'), 'population_by_age', ['data_date'], unique=False)
