@@ -1,4 +1,4 @@
-from app.constant import RANGES_MIN_MAX_AGE
+from app.constant import RANGES_MIN_MAX_AGE, NOW_YEAR, NOW_MONTH
 
 
 def get_ranges_by_min_max_age(min_age: int, max_age: int) -> str:
@@ -14,8 +14,8 @@ def get_ranges_by_min_max_age(min_age: int, max_age: int) -> str:
 def validate_input(month: int, year: int, min_age: int, max_age: int, min_population: int) -> tuple:
     if not (1 <= month <= 12):
         return False, "Month should be between 1 and 12"
-    if year > 2024:
-        return False, "You can't give a future year"
+    if year > NOW_YEAR or (year == NOW_YEAR and month > NOW_MONTH):
+        return False, "You can't give a future date"
     if min_age < 0 or max_age < 0:
         return False, "Ages must be positive numbers"
     if min_age > max_age:

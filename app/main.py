@@ -27,15 +27,16 @@ async def get_session() -> AsyncSession:
 
 session = DbDependency = Annotated[AsyncSession, Depends(get_session)]
 
-# It's not the best design but for the purpose of the exersice, I settled.
+# It's not the best design but for the purpose of the exercise, I settled.
 SETTLEMENT_SYMBOLS_ADDED = set()
 
 
 def cities_manipulation_function(record, data_to_add, extra_data=None):
     if record["שם_ישוב_לועזי"] == " ":
         return
-    SETTLEMENT_SYMBOLS_ADDED.add(int(record["סמל_ישוב"].strip()))
-    data_to_add.append({"settlement_symbol": int(record["סמל_ישוב"].strip()),
+    settlement_symbol = int(record["סמל_ישוב"].strip())
+    SETTLEMENT_SYMBOLS_ADDED.add(settlement_symbol)
+    data_to_add.append({"settlement_symbol": settlement_symbol,
                         "name": {
                             "en": " ".join([st.capitalize() for st in record["שם_ישוב_לועזי"].strip().split()]),
                             "he": record["שם_ישוב"].strip()}})

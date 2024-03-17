@@ -1,3 +1,5 @@
+import datetime
+
 SQLALCHEMY_DATABASE_URL = "postgresql+asyncpg://user:password@db:5432/postgres"
 
 MARCH_2024_CITIES_URL = ("https://data.gov.il/api/3/action/datastore_search?"
@@ -26,3 +28,8 @@ RANGES_MIN_MAX_AGE = {
     "range_56_64": (56, 64),
     "range_65_and_more": (65, 200)  # I assume there is no person above 200 years old
 }
+
+today = datetime.date.today()
+
+NOW_YEAR = today.year
+NOW_MONTH = today.month
