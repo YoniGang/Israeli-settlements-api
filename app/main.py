@@ -6,7 +6,8 @@ from sqlalchemy import select, text
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 
 from app.constant import SQLALCHEMY_DATABASE_URL, MARCH_2024_CITIES_URL, MARCH_2024_SETTLEMENTS_URL, \
-    APRIL_2019_SETTLEMENTS_URL, MAY_2019_SETTLEMENTS_URL, JUNE_2019_SETTLEMENTS_URL, JULY_2019_SETTLEMENTS_URL
+    APRIL_2019_SETTLEMENTS_URL, MAY_2019_SETTLEMENTS_URL, JUNE_2019_SETTLEMENTS_URL, JULY_2019_SETTLEMENTS_URL, \
+    VALID_DATES
 from app.db.models import City, PopulationByAge
 from app.managers import InitManager
 from app.schemas import SettlementsByCity
@@ -99,6 +100,9 @@ async def get_settlements(db: DbDependency, month: int, year: int, min_age: int,
     if not is_valid:
         print(error_msg)
         raise ValueError(error_msg)
+
+    if (year, month) not in VALID_DATES.keys():
+        return list(VALID_DATES.values())
 
     ranges_to_include = get_ranges_by_min_max_age(min_age, max_age)
 

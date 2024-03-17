@@ -29,6 +29,14 @@ RANGES_MIN_MAX_AGE = {
     "range_65_and_more": (65, 200)  # I assume there is no person above 200 years old
 }
 
+VALID_DATES = {
+    (2024, 3): {"year": 2024, "month": 3},
+    (2019, 4): {"year": 2019, "month": 4},
+    (2019, 5): {"year": 2019, "month": 5},
+    (2019, 6): {"year": 2019, "month": 6},
+    (2019, 7): {"year": 2019, "month": 7}
+}
+
 today = datetime.date.today()
 
 NOW_YEAR = today.year
