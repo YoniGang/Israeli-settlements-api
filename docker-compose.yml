@@ -9,6 +9,8 @@ services:
       - db
     environment:
       PORT: 80
+    command: >
+      sh -c "alembic upgrade head && /venv/bin/uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-80} --reload --forwarded-allow-ips='*' --proxy-headers"
     ports:
       - "8000:80"
     volumes:
